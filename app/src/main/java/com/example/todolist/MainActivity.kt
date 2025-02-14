@@ -19,6 +19,8 @@ package com.example.todolist
     import androidx.compose.foundation.layout.size
     import androidx.compose.foundation.layout.width
     import androidx.compose.foundation.lazy.LazyColumn
+    import androidx.compose.foundation.shape.CircleShape
+    import androidx.compose.foundation.shape.RoundedCornerShape
     import androidx.compose.material.icons.Icons
     import androidx.compose.material.icons.filled.Add
     import androidx.compose.material.icons.filled.Check
@@ -52,6 +54,7 @@ package com.example.todolist
     import androidx.compose.runtime.saveable.rememberSaveable
     import androidx.compose.runtime.setValue
     import androidx.compose.ui.Modifier
+    import androidx.compose.ui.draw.clip
     import androidx.compose.ui.graphics.Color
     import androidx.compose.ui.tooling.preview.Preview
     import androidx.compose.ui.unit.dp
@@ -136,7 +139,7 @@ package com.example.todolist
                             contentDescription = "Home Icon"
                         )
                     },
-                    label = { Text("Home") }
+                    label = { Text("TAREAS") }
                 )
                 NavigationBarItem(
                     selected = index == 1,
@@ -147,25 +150,13 @@ package com.example.todolist
                             contentDescription = "Fav Icon"
                         )
                     },
-                    label = { Text("FAV") }
-                )
-                NavigationBarItem(
-                    selected = index == 2,
-                    onClick = { index = 2 },
-                    icon = {
-                        Icon(
-                            imageVector = Icons.Default.Person,
-                            contentDescription = "Person Icon"
-                        )
-                    },
-                    label = { Text("Person") }
+                    label = { Text("COMPLETADAS") }
                 )
             }
         }
 
         @Composable
         fun MyContent(innerPadding: PaddingValues) {
-
             LazyColumn(
                 modifier = Modifier.consumeWindowInsets(innerPadding),
                 contentPadding = innerPadding
@@ -177,8 +168,9 @@ package com.example.todolist
                             .fillMaxWidth()
                             .height(100.dp)
                             .padding(10.dp)
-                            .border(1.dp, Color.Gray)
-                            .background(Color.Black)
+                            .clip(RoundedCornerShape(16.dp)) // Bordes redondeados
+                            .background(Color.Gray)
+                            .border(1.dp, Color.White, RoundedCornerShape(16.dp))
                     ) {
                         Checkbox(
                             checked = checked,
@@ -189,7 +181,9 @@ package com.example.todolist
                         )
                         Text(
                             text = "Tarea $count",
-                            color = Color.White
+                            color = Color.White,
+                            modifier = Modifier
+                                
                         )
                     }
                 }
